@@ -1,1 +1,700 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>🏳️‍🌈 FILIPEK JE GAY 3.0 📱</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
 
+        body {
+            min-height: 100vh;
+            min-height: 100dvh;
+            background: #0a0a0a;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            overflow: hidden;
+            position: relative;
+            touch-action: none;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        /* ===== POZADÍ S TEXTEM (mobil optimalizace) ===== */
+        .background-text {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+            pointer-events: none;
+            opacity: 0.06;
+        }
+
+        .background-text .text-line {
+            display: flex;
+            gap: 40px;
+            white-space: nowrap;
+            animation: scrollText 25s linear infinite;
+            font-size: 40px;
+            font-weight: 900;
+            color: #ff00ff;
+            font-family: 'Arial Black', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            padding: 20px 0;
+        }
+
+        .background-text .text-line:nth-child(2) {
+            animation-direction: reverse;
+            animation-duration: 30s;
+            font-size: 50px;
+            color: #00ff88;
+        }
+
+        .background-text .text-line:nth-child(3) {
+            animation-duration: 28s;
+            font-size: 30px;
+            color: #ff8800;
+        }
+
+        .background-text .text-line:nth-child(4) {
+            animation-direction: reverse;
+            animation-duration: 35s;
+            font-size: 60px;
+            color: #ff0088;
+        }
+
+        @keyframes scrollText {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* ===== GLITCH EFEKT (lehčí pro mobil) ===== */
+        .glitch-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 3px,
+                rgba(255, 0, 255, 0.02) 3px,
+                rgba(255, 0, 255, 0.02) 6px
+            );
+            animation: glitch 0.15s infinite;
+        }
+
+        @keyframes glitch {
+            0% { opacity: 0.2; transform: translateX(0); }
+            50% { opacity: 0.8; transform: translateX(1px); }
+            100% { opacity: 0.2; transform: translateX(-1px); }
+        }
+
+        /* ===== HLAVNÍ KARTA (mobil optimalizace) ===== */
+        .main-card {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            min-height: 100dvh;
+            padding: 16px;
+            touch-action: pan-y;
+        }
+
+        .card {
+            background: rgba(10, 10, 10, 0.88);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 2px solid rgba(255, 0, 255, 0.25);
+            border-radius: 28px;
+            padding: 30px 24px;
+            max-width: 420px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 
+                0 0 40px rgba(255, 0, 255, 0.15),
+                inset 0 0 40px rgba(255, 0, 255, 0.03);
+            animation: floatCard 3s ease-in-out infinite;
+            touch-action: pan-y;
+        }
+
+        @keyframes floatCard {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+        }
+
+        /* ===== PRIDE BADGE ===== */
+        .pride-badge {
+            display: inline-block;
+            background: linear-gradient(90deg, #ff0000, #ff8800, #ffff00, #00ff00, #0088ff, #8800ff, #ff0088);
+            background-size: 300% 100%;
+            animation: rainbowMove 2s linear infinite;
+            padding: 6px 20px;
+            border-radius: 50px;
+            font-size: 12px;
+            font-weight: 700;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 16px;
+            touch-action: manipulation;
+        }
+
+        @keyframes rainbowMove {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 300% 50%; }
+        }
+
+        /* ===== FOTKA (mobil) ===== */
+        .photo-container {
+            position: relative;
+            width: 140px;
+            height: 140px;
+            margin: 16px auto;
+            border-radius: 50%;
+            padding: 3px;
+            background: linear-gradient(45deg, #ff0088, #ff8800, #00ff88, #0088ff, #ff0088);
+            background-size: 300% 300%;
+            animation: rainbowSpin 3s linear infinite;
+            touch-action: manipulation;
+        }
+
+        @keyframes rainbowSpin {
+            0% { background-position: 0% 50%; transform: rotate(0deg); }
+            100% { background-position: 300% 50%; transform: rotate(360deg); }
+        }
+
+        .photo-container img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #0a0a0a;
+            -webkit-user-drag: none;
+            user-drag: none;
+        }
+
+        /* ===== NEON TEXT (mobil) ===== */
+        .neon-title {
+            font-size: 32px;
+            font-weight: 900;
+            color: white;
+            text-shadow: 
+                0 0 10px #ff00ff,
+                0 0 20px #ff00ff,
+                0 0 40px #ff00ff;
+            animation: pulseText 1.5s ease-in-out infinite;
+            margin: 10px 0;
+            letter-spacing: 1px;
+            touch-action: manipulation;
+        }
+
+        @keyframes pulseText {
+            0%, 100% { opacity: 1; text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff, 0 0 40px #ff00ff; }
+            50% { opacity: 0.7; text-shadow: 0 0 20px #ff00ff, 0 0 40px #ff00ff, 0 0 60px #ff00ff; }
+        }
+
+        .sub-text {
+            font-size: 16px;
+            color: #aaa;
+            margin: 6px 0;
+            font-weight: 300;
+            letter-spacing: 2px;
+        }
+
+        .sub-text span {
+            background: linear-gradient(90deg, #ff0088, #ff8800, #ff0088);
+            background-size: 200% 100%;
+            animation: rainbowMove 2s linear infinite;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+        }
+
+        /* ===== STATISTIKY (mobil) ===== */
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin: 16px 0;
+            padding: 14px;
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            touch-action: manipulation;
+        }
+
+        .stat-item {
+            text-align: center;
+            touch-action: manipulation;
+        }
+
+        .stat-number {
+            font-size: 24px;
+            font-weight: 900;
+            color: #ff00ff;
+            text-shadow: 0 0 20px rgba(255, 0, 255, 0.4);
+        }
+
+        .stat-label {
+            font-size: 10px;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 4px;
+        }
+
+        /* ===== TLAČÍTKA (mobil - velká pro dotyk) ===== */
+        .btn-group {
+            display: flex;
+            gap: 12px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+            touch-action: manipulation;
+        }
+
+        .btn {
+            padding: 16px 24px;
+            border: none;
+            border-radius: 50px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            flex: 1;
+            min-width: 120px;
+            touch-action: manipulation;
+            -webkit-touch-callout: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn:active {
+            transform: scale(0.95);
+        }
+
+        .btn-primary {
+            background: linear-gradient(90deg, #ff0088, #ff4400);
+            color: white;
+            box-shadow: 0 0 30px rgba(255, 0, 136, 0.25);
+        }
+
+        .btn-primary:active {
+            box-shadow: 0 0 50px rgba(255, 0, 136, 0.5);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.08);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .btn-secondary:active {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        /* ===== LÉTAJÍCÍ TEXTY (mobil) ===== */
+        .floating-text {
+            position: fixed;
+            pointer-events: none;
+            z-index: 5;
+            font-size: 20px;
+            font-weight: 900;
+            color: #ff00ff;
+            text-shadow: 0 0 20px rgba(255, 0, 255, 0.8);
+            animation: floatUp 4s ease-in-out forwards;
+            opacity: 0;
+            font-family: 'Arial Black', sans-serif;
+            text-transform: uppercase;
+            touch-action: none;
+        }
+
+        @keyframes floatUp {
+            0% { opacity: 0; transform: translateY(0) scale(0.5) rotate(0deg); }
+            20% { opacity: 1; }
+            100% { opacity: 0; transform: translateY(-250px) scale(1.3) rotate(15deg); }
+        }
+
+        /* ===== MOBILNÍ MENU ===== */
+        .fake-menu {
+            position: fixed;
+            top: 12px;
+            left: 12px;
+            z-index: 100;
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            touch-action: manipulation;
+        }
+
+        .menu-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #ff00ff;
+            box-shadow: 0 0 15px rgba(255, 0, 255, 0.4);
+            animation: pulseDot 1s ease-in-out infinite;
+        }
+
+        @keyframes pulseDot {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        .menu-text {
+            color: #555;
+            font-size: 10px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        /* ===== PROGRESS BAR ===== */
+        .fake-progress {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: rgba(255, 255, 255, 0.03);
+            z-index: 100;
+        }
+
+        .fake-progress-bar {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #ff0088, #ff8800, #00ff88, #0088ff, #ff0088);
+            background-size: 300% 100%;
+            animation: rainbowMove 2s linear infinite;
+            transition: width 0.3s;
+        }
+
+        /* ===== BOTTOM SHEET (mobilní gesto) ===== */
+        .bottom-sheet {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 50;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 8px 20px;
+            border-radius: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 10px;
+            color: #444;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            touch-action: manipulation;
+            animation: pulseBottom 2s ease-in-out infinite;
+            white-space: nowrap;
+        }
+
+        @keyframes pulseBottom {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        /* ===== RESPONSIVE (mobil first) ===== */
+        @media (max-width: 400px) {
+            .card {
+                padding: 20px 16px;
+                border-radius: 24px;
+            }
+            .neon-title {
+                font-size: 26px;
+            }
+            .photo-container {
+                width: 110px;
+                height: 110px;
+            }
+            .stats {
+                padding: 10px;
+            }
+            .stat-number {
+                font-size: 20px;
+            }
+            .btn {
+                padding: 14px 16px;
+                font-size: 13px;
+                min-width: 100px;
+            }
+            .background-text .text-line {
+                font-size: 28px !important;
+                gap: 25px;
+            }
+            .floating-text {
+                font-size: 16px;
+            }
+        }
+
+        @media (min-width: 600px) {
+            .background-text .text-line {
+                font-size: 70px !important;
+                gap: 60px;
+            }
+            .floating-text {
+                font-size: 28px;
+            }
+            .neon-title {
+                font-size: 42px;
+            }
+            .photo-container {
+                width: 180px;
+                height: 180px;
+            }
+        }
+
+        /* ===== ZAKÁZÁNÍ SCROLLU ===== */
+        ::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===== POZADÍ S TEXTEM ===== -->
+<div class="background-text">
+    <div class="text-line">🏳️‍🌈 FILIPEK JE GAY 🏳️‍🌈 🏳️‍🌈 FILIPEK JE GAY 🏳️‍🌈 🏳️‍🌈 FILIPEK JE GAY 🏳️‍🌈</div>
+    <div class="text-line">🌈 FILIPEK JE GAY 🌈 🌈 FILIPEK JE GAY 🌈 🌈 FILIPEK JE GAY 🌈</div>
+    <div class="text-line">💖 FILIPEK JE GAY 💖 💖 FILIPEK JE GAY 💖 💖 FILIPEK JE GAY 💖</div>
+    <div class="text-line">🏳️‍🌈 FILIPEK JE GAY 🏳️‍🌈 🏳️‍🌈 FILIPEK JE GAY 🏳️‍🌈 🏳️‍🌈 FILIPEK JE GAY 🏳️‍🌈</div>
+</div>
+
+<!-- ===== GLITCH ===== -->
+<div class="glitch-overlay"></div>
+
+<!-- ===== MENU ===== -->
+<div class="fake-menu">
+    <div class="menu-dot"></div>
+    <div class="menu-dot" style="animation-delay: 0.3s;"></div>
+    <div class="menu-dot" style="animation-delay: 0.6s;"></div>
+    <span class="menu-text">✦ PRIDE</span>
+</div>
+
+<!-- ===== PROGRESS ===== -->
+<div class="fake-progress">
+    <div class="fake-progress-bar" id="progressBar"></div>
+</div>
+
+<!-- ===== HLAVNÍ KARTA ===== -->
+<div class="main-card">
+    <div class="card">
+        <div class="pride-badge">🏳️‍🌈 OFFICIALLY GAY 🏳️‍🌈</div>
+
+        <div class="photo-container">
+            <img src="https://img.sanishtech.com/u/d108307778e2882182a951533b37085e.png" alt="Filipek" id="userPhoto">
+        </div>
+
+        <h1 class="neon-title">FILIPEK JE GAY</h1>
+        <p class="sub-text">✅ <span>100% POTVRZENO</span> ✅</p>
+        <p class="sub-text" style="font-size:12px; color:#444;">✨ Oficiální mobilní stránka ✨</p>
+
+        <div class="stats">
+            <div class="stat-item">
+                <div class="stat-number" id="gayCounter">69</div>
+                <div class="stat-label">🌈 Úroveň gay</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">∞</div>
+                <div class="stat-label">💖 Láska</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">🏳️‍🌈</div>
+                <div class="stat-label">✨ PRIDE</div>
+            </div>
+        </div>
+
+        <div class="btn-group">
+            <button class="btn btn-primary" onclick="moreGay()">🌈 VÍC GAY</button>
+            <button class="btn btn-secondary" onclick="closePage()">✕ ZAVŘÍT</button>
+        </div>
+
+        <p style="color:#333; font-size:10px; margin-top:16px; letter-spacing:0.5px; touch-action: manipulation;">
+            🏳️‍🌈 Tohle je prank. Filipek je tvůj kámoš. 🏳️‍🌈
+        </p>
+    </div>
+</div>
+
+<!-- ===== BOTTOM SHEET (mobilní gesto) ===== -->
+<div class="bottom-sheet" onclick="moreGay()">
+    👆 TAPNI SEM PRO EXTRA GAY 👆
+</div>
+
+<script>
+    // ===== FOTKA =====
+    // Nahraď placeholder za skutečnou fotku
+    // document.getElementById('userPhoto').src = 'https://tvoje-url.cz/fotka.jpg';
+
+    // ===== VIBRACE (pokud je podporována) =====
+    function vibrate(duration = 50) {
+        if (navigator.vibrate) {
+            navigator.vibrate(duration);
+        }
+    }
+
+    // ===== PROGRESS BAR =====
+    let progress = 0;
+    const progressBar = document.getElementById('progressBar');
+    setInterval(() => {
+        progress += Math.random() * 0.8;
+        if (progress > 100) progress = 0;
+        progressBar.style.width = progress + '%';
+    }, 100);
+
+    // ===== LÉTAJÍCÍ TEXTY (mobil optimalizace) =====
+    const gayPhrases = [
+        '🏳️‍🌈 FILIPEK JE GAY 🏳️‍🌈',
+        '🌈 FILIPEK 🌈',
+        '💖 GAY KING 💖',
+        '✨ PRIDE ✨',
+        '💕 FILIPEK 💕',
+        '🏳️‍🌈 GAY ICON 🏳️‍🌈',
+        '🌈 RAINBOW 🌈',
+        '💖 LOVE IS LOVE 💖',
+        '🏳️‍🌈 FILIPEK 🏳️‍🌈',
+        '🌈 GAY 🌈'
+    ];
+
+    function createFloatingText() {
+        const el = document.createElement('div');
+        el.className = 'floating-text';
+        el.textContent = gayPhrases[Math.floor(Math.random() * gayPhrases.length)];
+        el.style.left = Math.random() * 90 + '%';
+        el.style.top = Math.random() * 80 + 10 + '%';
+        
+        // Velikost podle mobilu
+        const isMobile = window.innerWidth < 600;
+        el.style.fontSize = (isMobile ? (Math.random() * 12 + 14) : (Math.random() * 20 + 18)) + 'px';
+        
+        el.style.animationDuration = (Math.random() * 2.5 + 2.5) + 's';
+        
+        const colors = ['#ff00ff', '#00ff88', '#ff8800', '#0088ff', '#ff0088', '#ffff00'];
+        el.style.color = colors[Math.floor(Math.random() * colors.length)];
+        el.style.textShadow = `0 0 20px ${el.style.color}`;
+        
+        document.body.appendChild(el);
+        setTimeout(() => el.remove(), 5000);
+    }
+
+    setInterval(createFloatingText, 180);
+    for (let i = 0; i < 12; i++) setTimeout(createFloatingText, i * 120);
+
+    // ===== "VÍC GAY" TLAČÍTKO (mobil verze) =====
+    function moreGay() {
+        // Vibrace
+        vibrate(30);
+
+        // Zvýšíme číslo
+        const counter = document.getElementById('gayCounter');
+        let current = parseInt(counter.textContent);
+        const increment = Math.floor(Math.random() * 8) + 3;
+        current += increment;
+        counter.textContent = current;
+
+        // Vystřelíme spoustu textů
+        const count = window.innerWidth < 400 ? 15 : 25;
+        for (let i = 0; i < count; i++) {
+            setTimeout(createFloatingText, i * 40);
+        }
+
+        // Změna barvy neonu
+        const title = document.querySelector('.neon-title');
+        const colors = ['#ff00ff', '#00ff88', '#ff8800', '#0088ff', '#ff0088', '#ffff00'];
+        const randomColor = colors[Math.floor(Math.random() * colors.length)];
+        title.style.textShadow = `0 0 10px ${randomColor}, 0 0 20px ${randomColor}, 0 0 40px ${randomColor}`;
+
+        // Alerty podle úrovně
+        if (current > 150) {
+            alert('🏳️‍🌈 FILIPEK JE TAK GAY, ŽE TO NEMAJÍ ANI V DUHOVÉM KRÁLOVSTVÍ! 🏳️‍🌈\n\nÚroveň: ' + current + ' 🚀');
+            vibrate(100);
+        } else if (current > 100) {
+            alert('🌈 FILIPEK JE EXTRA MEGA ULTRA GAY! 🌈\n\nÚroveň: ' + current + ' 💪');
+            vibrate(70);
+        } else if (current > 80) {
+            alert('💖 FILIPEK JE STÁLE VÍC GAY! 💖\n\nÚroveň: ' + current + ' ✨');
+        } else {
+            alert('💕 FILIPEK JE GAY! 💕\n\nÚroveň: ' + current + ' 🏳️‍🌈');
+        }
+
+        // Změna badge
+        const badge = document.querySelector('.pride-badge');
+        const badges = [
+            '🏳️‍🌈 GAY LEVEL ' + current + ' 🏳️‍🌈',
+            '🌈 PRIDE ' + current + ' 🌈',
+            '💖 FILIPEK ' + current + ' 💖',
+            '✨ GAY ICON ✨'
+        ];
+        badge.textContent = badges[Math.floor(Math.random() * badges.length)];
+    }
+
+    // ===== ZAVŘÍT =====
+    function closePage() {
+        vibrate(20);
+        if (confirm('🏳️‍🌈 Filipek je gay a ty to víš! 🏳️‍🌈\n\nOpravdu chceš zavřít? (Ale stejně se to bude vracet v myšlenkách 😂)')) {
+            window.close();
+        }
+    }
+
+    // ===== OCHRANA ZAVŘENÍ =====
+    window.onbeforeunload = function() {
+        return '🏳️‍🌈 FILIPEK JE GAY – PŘIJMI TO! 🏳️‍🌈';
+    };
+
+    // ===== UVÍTACÍ HLÁŠKA (mobil) =====
+    setTimeout(() => {
+        alert('🏳️‍🌈 VÍTEJ NA MOBILNÍ STRÁNCE FILIPKA! 🏳️‍🌈\n\n📱 Tady se slaví láska, duha a hlavně to, že FILIPEK JE GAY! 🎉');
+        vibrate(50);
+    }, 1500);
+
+    setTimeout(() => {
+        alert('💖 Mimochodem... FILIPEK JE GAY. Jen pro jistotu. 💖');
+        vibrate(30);
+    }, 5000);
+
+    // ===== NÁHODNÉ ZMĚNY NADPISU =====
+    const titles = [
+        'FILIPEK JE GAY',
+        '🏳️‍🌈 FILIPEK 🏳️‍🌈',
+        'GAY KING FILIPEK',
+        '🌈 FILIPEK 🌈',
+        'FILIPEK = GAY',
+        '💖 FILIPEK 💖',
+        '🏳️‍🌈 GAY 🏳️‍🌈',
+        'FILIPEK ✨ GAY'
+    ];
+
+    setInterval(() => {
+        const title = document.querySelector('.neon-title');
+        title.textContent = titles[Math.floor(Math.random() * titles.length)];
+    }, 3000);
+
+    // ===== TAPNUTÍ NA KARTU =====
+    document.querySelector('.card').addEventListener('click', function(e) {
+        // Nechat projít kliky na tlačítka
+        if (e.target.closest('.btn')) return;
+        moreGay();
+    });
+
+    // ===== PŘEHRÁNÍ PRO MOBILNÍ ZAŘÍZENÍ =====
+    console.log('🏳️‍🌈 FILIPEK JE GAY – MOBILNÍ VERZE 🏳️‍🌈');
+    console.log('📱 Optimalizováno pro dotykové ovládání');
+</script>
+</body>
+</html>
