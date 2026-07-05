@@ -1,398 +1,117 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Filipek ✦</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
-        }
+<meta charset="UTF-8">
+<title>🤡</title>
 
-        body {
-            min-height: 100vh;
-            min-height: 100dvh;
-            background: #0a0a0a;
-            font-family: -apple-system, 'Segoe UI', system-ui, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            overflow: hidden;
-            position: relative;
-        }
+<style>
+html,body{
+    margin:0;
+    overflow:hidden;
+    background:#000;
+    font-family:Arial,sans-serif;
+    cursor:crosshair;
+}
 
-        /* ===== JEMNÉ POZADÍ ===== */
-        .bg-text {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            pointer-events: none;
-            opacity: 0.035;
-            overflow: hidden;
-            display: flex;
-            flex-wrap: wrap;
-            align-content: center;
-            justify-content: center;
-            gap: 40px 80px;
-        }
+.msg{
+    position:absolute;
+    font-size:40px;
+    font-weight:bold;
+    pointer-events:none;
+    text-shadow:3px 3px 10px black;
+    animation:spin 2s linear infinite;
+}
 
-        .bg-text span {
-            font-size: 28px;
-            font-weight: 800;
-            color: #fff;
-            font-family: 'Arial Black', sans-serif;
-            text-transform: uppercase;
-            letter-spacing: 4px;
-            white-space: nowrap;
-            animation: fadeInOut 8s ease-in-out infinite;
-        }
+img{
+    position:absolute;
+    width:180px;
+    user-select:none;
+    animation:bounce 1s infinite alternate;
+}
 
-        .bg-text span:nth-child(odd) { animation-delay: 2s; color: #ff66aa; }
-        .bg-text span:nth-child(3n) { animation-delay: 4s; color: #66ffaa; }
-        .bg-text span:nth-child(5n) { animation-delay: 6s; color: #ffaa66; }
+@keyframes bounce{
+    from{transform:scale(1) rotate(-15deg);}
+    to{transform:scale(1.15) rotate(15deg);}
+}
 
-        @keyframes fadeInOut {
-            0%, 100% { opacity: 0.2; }
-            50% { opacity: 0.8; }
-        }
-
-        /* ===== KARTA ===== */
-        .card {
-            position: relative;
-            z-index: 10;
-            background: rgba(255, 255, 255, 0.04);
-            backdrop-filter: blur(40px);
-            -webkit-backdrop-filter: blur(40px);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            border-radius: 32px;
-            padding: 40px 32px;
-            max-width: 380px;
-            width: 100%;
-            text-align: center;
-            box-shadow: 
-                0 30px 80px rgba(0, 0, 0, 0.6),
-                inset 0 1px 0 rgba(255, 255, 255, 0.05);
-            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-
-        /* ===== FOTKA ===== */
-        .avatar-wrapper {
-            position: relative;
-            width: 120px;
-            height: 120px;
-            margin: 0 auto 24px;
-        }
-
-        .avatar {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 2px solid rgba(255, 255, 255, 0.08);
-            display: block;
-        }
-
-        .ring {
-            position: absolute;
-            inset: -4px;
-            border-radius: 50%;
-            background: conic-gradient(from 0deg, #ff66aa, #66ffaa, #66aaff, #ff66aa);
-            opacity: 0.4;
-            animation: spin 6s linear infinite;
-            z-index: -1;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        .status-dot {
-            position: absolute;
-            bottom: 4px;
-            right: 4px;
-            width: 16px;
-            height: 16px;
-            border-radius: 50%;
-            background: #66ffaa;
-            border: 2px solid #0a0a0a;
-            box-shadow: 0 0 20px rgba(102, 255, 170, 0.3);
-        }
-
-        /* ===== TEXT ===== */
-        .name {
-            font-size: 26px;
-            font-weight: 700;
-            color: #fff;
-            letter-spacing: -0.5px;
-            margin-bottom: 4px;
-        }
-
-        .badge {
-            display: inline-block;
-            font-size: 11px;
-            font-weight: 600;
-            color: #ff66aa;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            padding: 4px 16px;
-            border-radius: 100px;
-            background: rgba(255, 102, 170, 0.12);
-            border: 1px solid rgba(255, 102, 170, 0.08);
-            margin-bottom: 20px;
-        }
-
-        .bio {
-            font-size: 14px;
-            color: rgba(255, 255, 255, 0.35);
-            line-height: 1.6;
-            margin-bottom: 24px;
-            font-weight: 300;
-        }
-
-        .bio strong {
-            color: rgba(255, 255, 255, 0.6);
-            font-weight: 500;
-        }
-
-        /* ===== STATISTIKY ===== */
-        .stats {
-            display: flex;
-            justify-content: center;
-            gap: 32px;
-            margin-bottom: 28px;
-            padding: 16px 0;
-            border-top: 1px solid rgba(255, 255, 255, 0.04);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-        }
-
-        .stat {
-            text-align: center;
-        }
-
-        .stat-value {
-            font-size: 20px;
-            font-weight: 700;
-            color: #fff;
-            letter-spacing: -0.5px;
-        }
-
-        .stat-label {
-            font-size: 10px;
-            color: rgba(255, 255, 255, 0.2);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-top: 2px;
-        }
-
-        /* ===== TLAČÍTKA ===== */
-        .actions {
-            display: flex;
-            gap: 10px;
-        }
-
-        .btn {
-            flex: 1;
-            padding: 14px 20px;
-            border: none;
-            border-radius: 14px;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.25s ease;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            touch-action: manipulation;
-        }
-
-        .btn:active {
-            transform: scale(0.96);
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, #ff66aa, #ff4488);
-            color: #fff;
-            box-shadow: 0 4px 24px rgba(255, 68, 136, 0.25);
-        }
-
-        .btn-primary:active {
-            box-shadow: 0 2px 12px rgba(255, 68, 136, 0.4);
-        }
-
-        .btn-secondary {
-            background: rgba(255, 255, 255, 0.04);
-            color: rgba(255, 255, 255, 0.5);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-        }
-
-        .btn-secondary:active {
-            background: rgba(255, 255, 255, 0.08);
-        }
-
-        /* ===== FOOTER ===== */
-        .footer {
-            margin-top: 20px;
-            font-size: 10px;
-            color: rgba(255, 255, 255, 0.08);
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-        }
-
-        /* ===== RESPONSIVE ===== */
-        @media (max-width: 420px) {
-            .card {
-                padding: 28px 20px;
-                border-radius: 24px;
-            }
-            .avatar-wrapper {
-                width: 100px;
-                height: 100px;
-            }
-            .name {
-                font-size: 22px;
-            }
-            .stats {
-                gap: 20px;
-            }
-            .stat-value {
-                font-size: 17px;
-            }
-            .btn {
-                font-size: 12px;
-                padding: 12px 16px;
-            }
-        }
-    </style>
+@keyframes spin{
+    from{transform:rotate(0deg);}
+    to{transform:rotate(360deg);}
+}
+</style>
 </head>
+
 <body>
 
-<!-- ===== POZADÍ ===== -->
-<div class="bg-text">
-    <span>FILIPEK JE GAY</span>
-    <span>FILIPEK JE GAY</span>
-    <span>FILIPEK JE GAY</span>
-    <span>FILIPEK JE GAY</span>
-    <span>FILIPEK JE GAY</span>
-    <span>FILIPEK JE GAY</span>
-    <span>FILIPEK JE GAY</span>
-    <span>FILIPEK JE GAY</span>
-    <span>FILIPEK JE GAY</span>
-    <span>FILIPEK JE GAY</span>
-    <span>FILIPEK JE GAY</span>
-    <span>FILIPEK JE GAY</span>
-</div>
-
-<!-- ===== KARTA ===== -->
-<div class="card">
-
-    <!-- FOTKA -->
-    <div class="avatar-wrapper">
-        <div class="ring"></div>
-        <img src="https://img.sanishtech.com/u/d108307778e2882182a951533b37085e.png" alt="Filipek" class="avatar" id="userPhoto">
-        <div class="status-dot"></div>
-    </div>
-
-    <!-- JMÉNO -->
-    <h1 class="name">Filipek</h1>
-    <span class="badge">🏳️‍🌈 pride</span>
-
-    <!-- BIO -->
-    <p class="bio">
-        <strong>Gay</strong> • miluje duhu • <br>
-        oficiálně potvrzeno ✅
-    </p>
-
-    <!-- STATY -->
-    <div class="stats">
-        <div class="stat">
-            <div class="stat-value" id="gayCounter">420</div>
-            <div class="stat-label">🌈 gay level</div>
-        </div>
-        <div class="stat">
-            <div class="stat-value">∞</div>
-            <div class="stat-label">💖 láska</div>
-        </div>
-        <div class="stat">
-            <div class="stat-value">🏳️‍🌈</div>
-            <div class="stat-label">✨ pride</div>
-        </div>
-    </div>
-
-    <!-- TLAČÍTKA -->
-    <div class="actions">
-        <button class="btn btn-primary" onclick="moreGay()">🌈 + gay</button>
-        <button class="btn btn-secondary" onclick="closePage()">zavřít</button>
-    </div>
-
-    <p class="footer">✨ filipek je gay ✨</p>
-</div>
-
 <script>
-    // ===== FOTKA =====
-    // document.getElementById('userPhoto').src = 'https://tvoje-url.cz/fotka.jpg';
 
-    // ===== VIBRACE =====
-    function vibrate(duration = 30) {
-        if (navigator.vibrate) navigator.vibrate(duration);
+const image="https://img.sanishtech.com/u/db9a28418f7ca933dac1c34cbdc65c60.jpg";
+
+const texts=[
+"SI BOT",
+"NEUMÍŠ APEX",
+"SMRDÍ TI NOHY",
+"VLASY MÁŠ JAK KVĚTÁK",
+"L + RATIO",
+"404 SKILL NOT FOUND",
+"TOHLE JSI NEČEKAL",
+"NOOB ALERT",
+"GG EZ",
+"😂😂😂"
+];
+
+function rand(max){
+    return Math.random()*max;
+}
+
+function randomColor(){
+    return `hsl(${Math.random()*360},100%,50%)`;
+}
+
+function spawnImage(){
+
+    const img=document.createElement("img");
+
+    img.src=image;
+
+    img.style.left=rand(window.innerWidth-200)+"px";
+    img.style.top=rand(window.innerHeight-220)+"px";
+
+    document.body.appendChild(img);
+
+}
+
+function spawnText(){
+
+    const d=document.createElement("div");
+
+    d.className="msg";
+
+    d.innerText=texts[Math.floor(Math.random()*texts.length)];
+
+    d.style.left=rand(window.innerWidth-300)+"px";
+    d.style.top=rand(window.innerHeight-100)+"px";
+
+    d.style.color=randomColor();
+
+    document.body.appendChild(d);
+
+    setTimeout(()=>d.remove(),2500);
+
+}
+
+setInterval(spawnImage,250);
+
+setInterval(spawnText,180);
+
+document.onclick=()=>{
+
+    for(let i=0;i<25;i++){
+        spawnImage();
     }
 
-    // ===== MORE GAY =====
-    function moreGay() {
-        vibrate(20);
+};
 
-        const counter = document.getElementById('gayCounter');
-        let current = parseInt(counter.textContent);
-        current += Math.floor(Math.random() * 12) + 4;
-        counter.textContent = current;
-
-        // Jemné zvýraznění
-        const card = document.querySelector('.card');
-        card.style.transform = 'scale(0.98)';
-        setTimeout(() => {
-            card.style.transform = '';
-        }, 150);
-
-        // Změna barvy badge
-        const badge = document.querySelector('.badge');
-        const colors = ['#ff66aa', '#66ffaa', '#66aaff', '#ffaa66'];
-        badge.style.color = colors[Math.floor(Math.random() * colors.length)];
-
-        // Skrytá zpráva (jen když hodně)
-        if (current > 800) {
-            document.querySelector('.footer').textContent = '🏳️‍🌈 dosáhl jsi gay levelu ' + current + ' 🏳️‍🌈';
-        }
-    }
-
-    // ===== ZAVŘÍT =====
-    function closePage() {
-        vibrate(15);
-        if (confirm('🏳️‍🌈 Filipek je gay. Přijmi to.')) {
-            window.close();
-        }
-    }
-
-    // ===== OCHRANA =====
-    window.onbeforeunload = function() {
-        return '🏳️‍🌈 FILIPEK JE GAY';
-    };
-
-    // ===== KLIK NA KARTU =====
-    document.querySelector('.card').addEventListener('click', function(e) {
-        if (e.target.closest('.btn')) return;
-        moreGay();
-    });
-
-    // ===== ZMĚNA TEXTU =====
-    const names = ['Filipek', '🏳️‍🌈 Filipek', 'Filipek ✦', 'Gay King', '🌈 Filipek'];
-    setInterval(() => {
-        document.querySelector('.name').textContent = names[Math.floor(Math.random() * names.length)];
-    }, 4000);
 </script>
 
 </body>
